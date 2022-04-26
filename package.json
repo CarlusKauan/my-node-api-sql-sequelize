@@ -1,0 +1,32 @@
+{
+  "name": "my-api-node-sql-sequelize",
+  "version": "1.0.0",
+  "description": "Muita gente que começa a programar com Node.js aprende a usa-lo com MongoDB que é um banco NoSQL, mas será que é a melhor opção?",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CarlusKauan/my-node-api-sql-sequelize.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CarlusKauan/my-node-api-sql-sequelize/issues"
+  },
+  "homepage": "https://github.com/CarlusKauan/my-node-api-sql-sequelize#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.0",
+    "pg": "^8.7.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.19.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15",
+    "sequelize-cli": "^6.4.1"
+  }
+}
