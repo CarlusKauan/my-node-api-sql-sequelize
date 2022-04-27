@@ -11,7 +11,8 @@ class User extends Model {
     }
 
     static associate(models) {
-        this.hasMany(models.Pet, { foreignKey: 'user_id', as: 'pets' })
+        this.hasMany(models.Pet, { foreignKey: 'user_id', as: 'pets' });
+        this.belongsToMany(models.Category, { foreignKey: 'user_id', through: 'user_categories', as: 'categories'});
     }
 };
 
