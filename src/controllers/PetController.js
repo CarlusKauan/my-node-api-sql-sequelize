@@ -3,7 +3,7 @@ const User = require('../models/User');
 
 module.exports = {
 
-    async index(req, res) {
+    async show(req, res) {
         const { user_id } = req.params;
 
         const user = await User.findByPk( user_id, {
@@ -12,6 +12,16 @@ module.exports = {
 
         // return res.json(user.pets) -> caso queira retornar so os dados dos pets !
         return res.json(user);
+    },
+
+    async index(req, res) {
+        const pets = await Pet.findAll()
+
+        if(!pets) {
+            res.status(400).json({ error: 'User not found' });
+        }
+
+        return res.status(200).json(pets)
     },
 
     async store(req, res) {
