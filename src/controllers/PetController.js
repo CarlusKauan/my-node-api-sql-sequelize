@@ -26,7 +26,7 @@ module.exports = {
 
     async store(req, res) {
         const { user_id } = req.params;
-        const { name, age, breed } = req.body;
+        const { name, age, breed, imagem, descricao, uf, sexo, porte, situacao  } = req.body;
 
         const user = await User.findByPk(user_id)
 
@@ -39,6 +39,12 @@ module.exports = {
             age,
             breed,
             user_id,
+            imagem,
+            descricao,
+            uf,
+            sexo,
+            porte,
+            situacao
         });
 
         return res.json(pet);
