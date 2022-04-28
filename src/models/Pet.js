@@ -6,6 +6,12 @@ class Pet extends Model {
             name: DataTypes.STRING,
             age: DataTypes.INTEGER,
             breed: DataTypes.STRING,
+            imagem: DataTypes.STRING,
+            descricao: DataTypes.STRING,
+            uf: DataTypes.STRING,
+            sexo: DataTypes.STRING,
+            porte: DataTypes.STRING,
+            situacao: DataTypes.STRING
         }, {
             sequelize
         })
