@@ -1,10 +1,14 @@
 const User = require("../models/User");
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
+const dbConfig = require('../config/database');
+
+// const dbconection =  new Sequelize(dbConfig);
 
 
 const SECRET = 'CARLOS123'
 const app = require('express');
+const { use } = require("../routes");
 
 module.exports = {
   async store(req, res) {
@@ -60,12 +64,27 @@ module.exports = {
     return res.json(users);
   },
 
+
+
+
   async login(req, res){
-    if(req.body.name === 'Carlos' && req.body.senha === '123456'){
+
+    const username = await User.findOne({
+      attributes : ['name', 'senha'],
+      where: {
+        name: req.body.name
+      }
+    });
+
+    if(username == null){
+      return res.status(400).json('Nenhum usuário encontrado');
+    }
+
+
+    if(req.body.name === username.name && await bcrypt.compare(req.body.senha, username.senha)){
      const token = jwt.sign({name : 'Carlus'}, SECRET, {expiresIn : 500});
       return res.json({auth: true, token});
     }
-
     return res.status(400).json('UserName e senha inválidos');
   },
 
