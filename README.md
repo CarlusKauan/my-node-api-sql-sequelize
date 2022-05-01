@@ -1,4 +1,9 @@
-# PostgreSQL com sequelize 
+# AmoPatas
+
+<div>
+    <img src="https://ozenero.com/wp-content/uploads/2018/07/angular-6-httpclient-postgresql-node-js-express-sequelize-crud-apis-post-get-put-delete-feature-image.png" alt="techs">
+</div>
+
 
 Muita gente que começa a programar com Node.js aprende a usa-lo com MongoDB que é um banco NoSQL, mas será que é a melhor opção?
 
