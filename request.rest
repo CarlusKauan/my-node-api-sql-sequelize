@@ -1,0 +1,16 @@
+GET http://localhost:3333/users
+
+### 
+
+POST http://localhost:3333/users
+Content-Type: application/json
+
+{
+    "name": "Carlos Kauan",
+    "email": "Carlos11@gmail.com",
+    "senha": "Carlosgameplay",
+    "telefone": "(11) 9874-3123",
+    "descricao": "sou bravo",
+    "data_nascimento": "28/04/2022",
+    "rede_social": "Carlos@hotmail.com"
+}
