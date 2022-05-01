@@ -1,7 +1,12 @@
 const User = require("../models/User");
+const bcrypt = require('bcrypt')
+
 
 module.exports = {
   async store(req, res) {
+
+    const hashedPassword = await bcrypt.hash(req.body.senha, 10)
+
     const {
       name,
       email,
@@ -15,14 +20,12 @@ module.exports = {
     const user = await User.create({
       name,
       email,
-      senha,
+      senha: hashedPassword,
       telefone,
       descricao,
       data_nascimento,
       rede_social,
     });
-
-    this.encript(senha); // chamando metodo de criptografia e inseirindo a Prop senha
     return res.json(user);
   },
 
@@ -30,34 +33,4 @@ module.exports = {
     const users = await User.findAll();
     return res.json(users);
   },
-
-  //TODO METODO DE CRIPTOGRAFIA 
-  encript(password) {
-    const bcrypt = require("bcrypt");
-    const pass = password
-
-    for (let saltRounds = 10; saltRounds <= 15; saltRounds++) {
-      bcrypt.hash(pass, saltRounds).then((passHashed) => {
-        console.log(passHashed);
-      });
-    }
-  },
-
-
-
-  //TESTE AINDA
- async Authenticate(user, senha){
-     const {nome} = user.body;
-     const pass = await User.findAll(nome = user)
-
-     const match = await bcrypt.compare(pass, senha)
-
-     if(match){
-        console.log("Permitido")
-     }
-     else{
-         console.log("Acesso negago")
-     }
- }
-
 };
