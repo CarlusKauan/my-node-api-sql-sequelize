@@ -11,6 +11,27 @@ module.exports = {
 
     const hashedPassword = await bcrypt.hash(req.body.senha, 10)
 
+    const userExists = await User.findOne({
+      where: {
+        name: req.body.name,
+      }
+    })
+    const emailExists = await User.findOne({
+      where: {
+        email: req.body.email,
+      }
+    })
+
+    if (userExists) {
+      return res.status(409).json({
+        error: "Esse Nome já existe, tente outro"
+      })
+    } else if (emailExists) {
+      return res.status(409).json({
+        error: "Email já existe, tente outro"
+      })
+    }
+
     const {
       name,
       email,
@@ -30,6 +51,7 @@ module.exports = {
       data_nascimento,
       rede_social,
     });
+
     return res.json(user);
   },
 
@@ -45,8 +67,18 @@ module.exports = {
     }
 
     return res.status(400).json('UserName e senha inválidos');
+  },
+
+  async show(req, res) {
+    const {
+      id
+    } = req.params;
+    const user = await User.findByPk(id)
+    return res.json(user)
   }
 };
+
+
 
 
 

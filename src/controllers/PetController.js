@@ -49,4 +49,8 @@ module.exports = {
 
         return res.json(pet);
     },
+
+    async delete(req, res){
+
+    },
 }
