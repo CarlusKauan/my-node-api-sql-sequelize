@@ -66,13 +66,12 @@ module.exports = {
 
 
 
-
   async login(req, res){
 
     const username = await User.findOne({
-      attributes : ['name', 'senha'],
+      attributes : ['email', 'senha'],
       where: {
-        name: req.body.name
+        email: req.body.email
       }
     });
 
@@ -81,7 +80,7 @@ module.exports = {
     }
 
 
-    if(req.body.name === username.name && await bcrypt.compare(req.body.senha, username.senha)){
+    if(req.body.email === username.email && await bcrypt.compare(req.body.senha, username.senha)){
      const token = jwt.sign({name : 'Carlus'}, SECRET, {expiresIn : 500});
       return res.json({auth: true, token});
     }
