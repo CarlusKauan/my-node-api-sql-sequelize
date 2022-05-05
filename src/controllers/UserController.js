@@ -1,14 +1,14 @@
 const User = require("../models/User");
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
+const crypto  = require('crypto');
 const dbConfig = require('../config/database');
 
 // const dbconection =  new Sequelize(dbConfig);
-
-
-const SECRET = 'CARLOS123'
+const SECRET = 'AMOPATAS'
 const app = require('express');
 const { use } = require("../routes");
+const { decode } = require("punycode");
 
 module.exports = {
   async store(req, res) {
@@ -59,6 +59,9 @@ module.exports = {
     return res.json(user);
   },
 
+
+
+
   async index(req, res) {
     const users = await User.findAll();
     return res.json(users);
@@ -81,7 +84,7 @@ module.exports = {
 
 
     if(req.body.email === username.email && await bcrypt.compare(req.body.senha, username.senha)){
-     const token = jwt.sign({name : 'Carlus'}, SECRET, {expiresIn : 500});
+     const token = jwt.sign({username}, SECRET, {expiresIn : 500});
       return res.json({auth: true, token});
     }
     return res.status(400).json('UserName e senha inválidos');
@@ -93,7 +96,26 @@ module.exports = {
     } = req.params;
     const user = await User.findByPk(id)
     return res.json(user)
+  },
+
+
+
+  verifyJwt(req,res,next){
+    const token  = req.headers['x-access-token'];// pega na inserção do token e coloca na variavel (token-jwt é pego no headers)
+    jwt.verify(token, SECRET, (err, decoded) =>{
+      if(err)
+        return res.status(401).json('Necessário login e senha ლ(╹◡╹ლ)');
+        req.username = decoded.username; // token sera guardado pelo username do usuario <3
+        next(); // middieware de excução do proximo method
+    })
+
   }
+
+   
+
+
+
+
 };
 
 
