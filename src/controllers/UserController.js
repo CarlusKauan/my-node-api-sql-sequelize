@@ -14,7 +14,7 @@ module.exports = {
   async store(req, res) {
 
     const hashedPassword = await bcrypt.hash(req.body.senha, 10)
-
+  
     const userExists = await User.findOne({
       where: {
         name: req.body.name,
@@ -85,7 +85,7 @@ module.exports = {
 
     if(req.body.email === username.email && await bcrypt.compare(req.body.senha, username.senha)){
      const token = jwt.sign({username}, SECRET, {expiresIn : 500});
-      return res.json({auth: true, token});
+      return res.json(token);
     }
     return res.status(400).json('UserName e senha inválidos');
   },
