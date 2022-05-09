@@ -20,6 +20,7 @@ class Pet extends Model {
     static associate(models) {
         this.belongsTo(models.User, { foreignKey: 'user_id', as: 'owner' })
     }
+
 };
 
 module.exports = Pet;
