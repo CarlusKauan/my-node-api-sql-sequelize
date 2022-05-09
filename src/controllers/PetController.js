@@ -25,8 +25,9 @@ module.exports = {
     },
 
     async store(req, res) {
+        const { filename } = req.file;
         const { user_id } = req.params;
-        const { name, age, breed, imagem, descricao, uf, sexo, porte, situacao  } = req.body;
+        const { name, age, breed, descricao, uf, sexo, porte, situacao  } = req.body;
 
         const user = await User.findByPk(user_id)
 
@@ -39,7 +40,7 @@ module.exports = {
             age,
             breed,
             user_id,
-            imagem,
+            imagem: filename,
             descricao,
             uf,
             sexo,
@@ -54,3 +55,17 @@ module.exports = {
 
     },
 }
+
+
+
+// {
+//   "name": "vivi",
+//   "age": "2",
+//   "breed": "vira-lata",
+//   "imagem": "gato",
+//   "descricao": "fedido",
+//   "uf": "sp",
+//   "sexo": "femea",
+//   "porte": "medio",
+//   "situacao": "disponivel adoção"
+// }
