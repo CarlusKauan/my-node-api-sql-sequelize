@@ -28,7 +28,7 @@ module.exports = {
         const { filename } = req.file;
         const { user_id } = req.params;
         const { name, age, breed, descricao, uf, sexo, porte, situacao  } = req.body;
-
+        // console.log( req.file + 'OK TA RECEBENDO');
         const user = await User.findByPk(user_id)
 
         if(!user){
