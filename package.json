@@ -23,8 +23,12 @@
     "cors": "^2.8.5",
     "express": "^4.18.0",
     "jsonwebtoken": "^8.5.1",
+<<<<<<< HEAD
     "multer": "^1.4.4",
     "node-dev": "^7.4.3",
+=======
+    "passport-jwt": "^4.0.0",
+>>>>>>> 18c3bf47f62f207a2650b7352cdbd83e6a4160b3
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.19.0"
