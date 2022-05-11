@@ -8,6 +8,7 @@ const CategoryController  = require('./controllers/CategoryController');
 
 const routes = express.Router()
 const upload = multer(uploadConfig);
+// const maxFotos = 3;
 
 routes.post('/users', UserController.store);
 routes.get('/users', UserController.index);
@@ -15,6 +16,7 @@ routes.get('/users', UserController.index);
 routes.get('/users/pets', PetController.index);
 routes.get('/users/:user_id/pets', PetController.show);
 routes.post('/users/:user_id/pets', upload.single('imagem'), PetController.store);
+// routes.post('/users/:user_id/pets', upload.array('imagem', maxFotos), PetController.store);
 
 routes.get('/users/:user_id/categories', CategoryController.index);
 routes.post('/users/:user_id/categories', CategoryController.store);
