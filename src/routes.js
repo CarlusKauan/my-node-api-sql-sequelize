@@ -27,6 +27,4 @@ routes.delete('/users/:user_id/categories',verifyJwt, CategoryController.delete)
 routes.post('/login',UserController.login);
 
 
-
-
 module.exports = routes;
