@@ -12,13 +12,13 @@ const routes = express.Router()
 const upload = multer(uploadConfig);
 // const maxFotos = 3;
 
-routes.post('/users', UserController.store)
+routes.post('/users', upload.single('imagem'), UserController.store) //criando user
 // routes.get('/users',verifyJwt ,UserController.index); // COM AUTENTICAÇÃO
-routes.get('/users',UserController.index);
+routes.get('/users',UserController.index); //buscar todos os users
 
-routes.get('/users/pets', PetController.index);
-routes.get('/users/:user_id/pets', PetController.show);
-routes.post('/users/:user_id/pets', upload.single('imagem'), PetController.store);
+routes.get('/users/pets', PetController.index); //buscar todos os pets
+routes.get('/users/:user_id/pets', PetController.show); // busca o pet do user
+routes.post('/users/:user_id/pets', upload.single('imagem'), PetController.store); //criando pet
 // routes.post('/users/:user_id/pets', upload.array('imagem', maxFotos), PetController.store);
 
 routes.get('/users/:user_id/categories', CategoryController.index);

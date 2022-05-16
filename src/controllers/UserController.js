@@ -13,8 +13,9 @@ const { decode } = require("punycode");
 module.exports = {
   async store(req, res) {
 
+    const { filename } = req.file;
     const hashedPassword = await bcrypt.hash(req.body.senha, 10)
-  
+
     const userExists = await User.findOne({
       where: {
         name: req.body.name,
@@ -49,6 +50,7 @@ module.exports = {
     const user = await User.create({
       name,
       email,
+      imagem: filename,
       senha: hashedPassword,
       telefone,
       descricao,
@@ -111,7 +113,7 @@ module.exports = {
 
   }
 
-   
+
 
 
 
