@@ -1,17 +1,18 @@
 const Category = require('../models/Category');
 const User = require('../models/User');
+const { patch, put } = require('../routes');
 
 module.exports = {
     async index(req, res){
         const { user_id } = req.params;
-        
+
         const user = await User.findByPk(user_id, {
             include: { association : 'categories' }
         });
 
         return res.json(user.categories);
     },
-    
+
     async store(req, res){
         const { user_id } = req.params;
         const { name } = req.body;
@@ -22,9 +23,9 @@ module.exports = {
             res.status(400).json({ error: 'User not found'})
         }
 
-        const [ category ] = await Category.findOrCreate({ 
+        const [ category ] = await Category.findOrCreate({
             where: { name }
-        });        
+        });
 
         await user.addCategory(category);
 
@@ -41,7 +42,7 @@ module.exports = {
             res.status(400).json({ error: 'User not found'})
         }
 
-        const category = await Category.findOne({ 
+        const category = await Category.findOne({
             where : { name }
         });
 
@@ -49,4 +50,7 @@ module.exports = {
 
         return res.json({ message: 'Remove Category with Success '});
     }
+
+
+
 }
