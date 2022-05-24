@@ -14,7 +14,7 @@ const upload = multer(uploadConfig);
 
 routes.post('/users', upload.single('imagem'), UserController.store) //criando user
 // routes.get('/users',verifyJwt ,UserController.index); // COM AUTENTICAÇÃO
-routes.get('/users',UserController.index); //buscar todos os users
+routes.get('/users', UserController.index); //buscar todos os users
 
 routes.get('/users/pets', PetController.index); //buscar todos os pets
 routes.get('/users/:user_id/pets', PetController.show); // busca o pet do user
@@ -25,6 +25,16 @@ routes.get('/users/:user_id/categories', CategoryController.index);
 routes.post('/users/:user_id/categories', CategoryController.store);
 routes.delete('/users/:user_id/categories',verifyJwt, CategoryController.delete);
 routes.post('/login',UserController.login);
+
+// routes.put('/users/:user_id/pets', PetController.put);
+
+//rotas de updateUser
+routes.put('/users/:id', UserController.updateUser);
+routes.put('/users_imagem/:id', UserController.updateImagem);
+
+//rotas de updatePet
+routes.put('/pets/:id', PetController.updatePet);
+routes.put('/users_imagem/:id', UserController.updateImagem);
 
 
 module.exports = routes;
