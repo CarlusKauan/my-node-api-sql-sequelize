@@ -3,57 +3,65 @@ const User = require('../models/User');
 
 module.exports = {
 
-    async show(req, res) {
-        const { user_id } = req.params;
+  async show(req, res) {
+    const { user_id } = req.params;
 
-        const user = await User.findByPk( user_id, {
-            include: { association: 'pets' }
-        });
+    const user = await User.findByPk(user_id, {
+      include: { association: 'pets' }
+    });
 
-        // return res.json(user.pets) -> caso queira retornar so os dados dos pets !
-        return res.json(user);
-    },
+    // return res.json(user.pets) -> caso queira retornar so os dados dos pets !
+    return res.json(user);
+  },
 
-    async index(req, res) {
-        const pets = await Pet.findAll()
+  async index(req, res) {
+    const pets = await Pet.findAll()
 
-        if(!pets) {
-            res.status(400).json({ error: 'User not found' });
-        }
+    if (!pets) {
+      res.status(400).json({ error: 'User not found' });
+    }
 
-        return res.status(200).json(pets)
-    },
+    return res.status(200).json(pets)
+  },
 
-    async store(req, res) {
-        const { filename } = req.file;
-        const { user_id } = req.params;
-        const { name, age, breed, descricao, uf, sexo, porte, situacao  } = req.body;
-        // console.log( req.file + 'OK TA RECEBENDO');
-        const user = await User.findByPk(user_id)
+  async store(req, res) {
+    const { filename } = req.file;
+    const { user_id } = req.params;
+    const { name, age, breed, descricao, uf, sexo, porte, situacao } = req.body;
+    // console.log( req.file + 'OK TA RECEBENDO');
+    const user = await User.findByPk(user_id)
 
-        if(!user){
-            return res.status(400).json({ error: 'usuario não existe ＞﹏＜' })
-        }
+    if (!user) {
+      return res.status(400).json({ error: 'usuario não existe ＞﹏＜' })
+    }
 
-        const pet = await Pet.create({
-            name,
-            age,
-            breed,
-            user_id,
-            imagem: filename,
-            descricao,
-            uf,
-            sexo,
-            porte,
-            situacao
-        });
+    const pet = await Pet.create({
+      name,
+      age,
+      breed,
+      user_id,
+      imagem: filename,
+      descricao,
+      uf,
+      sexo,
+      porte,
+      situacao
+    });
 
-        return res.json(pet);
-    },
+    return res.json(pet);
+  },
 
-    async delete(req, res){
+  // async delete(req, res){
 
-    },
+  // },
+
+  async destroy(req, res) {
+    const pet = await Pet.deleteOne(req.params.id)
+
+    return res.status(200).send({ message: 'deletado' })
+  },
+
+
 }
 
 
