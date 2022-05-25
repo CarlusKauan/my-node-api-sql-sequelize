@@ -30,11 +30,11 @@ routes.post('/login',UserController.login);
 
 //rotas de updateUser
 routes.put('/users/:id', UserController.updateUser);
-routes.put('/users_imagem/:id', UserController.updateImagem);
+
 
 //rotas de updatePet
 routes.put('/pets/:id', PetController.updatePet);
-routes.put('/users_imagem/:id', UserController.updateImagem);
+
 
 
 module.exports = routes;
