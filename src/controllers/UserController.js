@@ -115,10 +115,11 @@ module.exports = {
 
   //funciona por meio de json
   async updateUser(req, res) {
-    try {
+
       const { id } = req.params
       const { name,
         email,
+        imagem: filename,
         telefone,
         descricao,
         data_nascimento,
@@ -135,6 +136,7 @@ module.exports = {
         const user = await User.update({
           name,
           email,
+          imagem: filename,
           telefone,
           descricao,
           data_nascimento,
@@ -144,9 +146,7 @@ module.exports = {
         res.status(200).json({ user })
       }
 
-    } catch (error) {
-      res.status(400).json({ user })
-    }
+
 
   },
 
@@ -166,6 +166,8 @@ module.exports = {
       // console.log(user + "teste2222");
     }
   }
+
+
 
 };
 
