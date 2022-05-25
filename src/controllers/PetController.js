@@ -58,14 +58,12 @@ module.exports = {
 
     async updatePet(req, res) {
 
-      try {
-        // const { filename } = req.file;
         const { id } = req.params
         const {name,
           age,
           breed,
           // user_id,
-          // imagem: filename,
+          imagem: filename,
           descricao,
           uf,
           sexo,
@@ -85,7 +83,7 @@ module.exports = {
             age,
             breed,
             // user_id,
-            // imagem: filename,
+            imagem: filename,
             descricao,
             uf,
             sexo,
@@ -96,17 +94,7 @@ module.exports = {
           res.status(200).json({ pet })
         }
 
-      } catch (error) {
-        res.status(400).json({ pet })
-      }
-
-    },
-
-
-
-
-
-
+    }
 
 }
 
