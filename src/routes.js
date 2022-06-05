@@ -35,6 +35,9 @@ routes.put('/users/:id', UserController.updateUser);
 //rotas de updatePet
 routes.put('/pets/:id', PetController.updatePet);
 
+// routes.put('/users_imagem/:id', UserController.updateImagem);
+
+//http://localhost:3333/users_imagem/3
 
 
 module.exports = routes;
