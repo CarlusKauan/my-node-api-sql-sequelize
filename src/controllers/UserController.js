@@ -151,21 +151,22 @@ module.exports = {
   },
 
   //ainda não funciona
-  async updateImagem(req, res){
-    const { filename } = req.file;
+  // async updateImagem(req, res){
+  //   const { filename } = req.file;
+  //   const { id } = req.params
 
-    const user = await User.findOne({ where: { id } })
+  //   const user = await User.findOne({ where: { id } })
 
-    if (!user) {
-      res.status(401).json({ message: "Nenhum usuario encontrado" })
-    } else {
-      const user = await User.update({
-        imagem: filename }, { where: { id } })
+  //   if (!user) {
+  //     res.status(401).json({ message: "Nenhum usuario encontrado" })
+  //   } else {
+  //     const user = await User.update({
+  //       imagem: filename }, { where: { id } })
 
-      res.status(200).json({ user })
-      // console.log(user + "teste2222");
-    }
-  }
+  //     res.status(200).json({ user, imagem })
+  //     // console.log(user + "teste2222");
+  //   }
+  // }
 
 
 
@@ -174,8 +175,13 @@ module.exports = {
 
 
 // {
-// 	"name": "catia",
-// 	"email": "catia@gmail.com"
+// 	"name": "Diana",
+// 	"email": "Diana@gmail.com",
+// 	"imagem": "user_Wanda-1653154763235.jpg",
+// 	 "telefone": "(11) 9774-0009",
+//    "descricao": "Amo gatos"  ,
+//    "data_nascimento":"23/12/2000" ,
+//     "rede_social": "katia125@hotmail.com"
 // }
 
 
