@@ -87,16 +87,22 @@ module.exports = {
 
     if (req.body.email === username.email && await bcrypt.compare(req.body.senha, username.senha)) {
       const token = jwt.sign({ username }, SECRET, { expiresIn: 500 });
-      return res.json(token);
+      return res.json({ token: token });
     }
     return res.status(400).json('UserName e senha inválidos');
   },
+
+  
 
   async show(req, res) {
     const {
       id
     } = req.params;
     const user = await User.findByPk(id)
+
+    if(!user){
+      res.status(401).json({ message: "Nenhum usuario encontrado" })
+    }
     return res.json(user)
   },
 
@@ -165,17 +171,20 @@ module.exports = {
       res.status(200).json({ user })
       // console.log(user + "teste2222");
     }
+  },
+
+
+  async UserGet(req, res){
+    const {email} = req.params;
+    const user = await User.findOne({where: {email}})
+
+    if(!user){
+      res.status(400).json({ message: "Nenhum usuario encontrado" })
+    }
+
+    return res.json(user);
   }
 
-
-
 };
-
-
-
-// {
-// 	"name": "catia",
-// 	"email": "catia@gmail.com"
-// }
 
 
