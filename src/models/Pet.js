@@ -19,6 +19,7 @@ class Pet extends Model {
 
     static associate(models) {
         this.belongsTo(models.User, { foreignKey: 'user_id', as: 'owner' })
+        this.hasMany(models.Solicitacao, { foreignKey: 'pets_id', as: 'solicitado' })
     }
 
 };
