@@ -1,3 +1,4 @@
+
 const Pet = require('../models/Pet');
 const User = require('../models/User');
 
@@ -10,8 +11,8 @@ module.exports = {
       include: { association: 'pets' }
     });
 
-    // return res.json(user.pets) -> caso queira retornar so os dados dos pets !
-    return res.json(user);
+    return res.json(user.pets)  //-> caso queira retornar so os dados dos pets !
+    // return res.json(user);
   },
 
   async index(req, res) {
@@ -56,9 +57,13 @@ module.exports = {
   // },
 
   async destroy(req, res) {
-    const pet = await Pet.deleteOne(req.params.id)
+    const { id } = req.params;
+    await Pet.destroy({
+      where: { id }
 
-    return res.status(200).send({ message: 'deletado' })
+    });
+
+    return res.status(200).send({ message: 'Pet excluído com sucesso' })
   },
 
 
