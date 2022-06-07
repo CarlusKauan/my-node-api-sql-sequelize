@@ -6,6 +6,8 @@ const UserController = require('./controllers/UserController');
 const PetController  = require('./controllers/PetController');
 const CategoryController  = require('./controllers/CategoryController');
 const SolicitacaoController  = require('./controllers/SolicitacaoController');
+
+
 const { verifyJwt } = require('./controllers/UserController');
 const { username } = require('./config/database');
 
@@ -13,26 +15,37 @@ const routes = express.Router()
 const upload = multer(uploadConfig);
 // const maxFotos = 3;
 
+
+//Controller de User
 routes.post('/users', upload.single('imagem'), UserController.store) //criando user
 // routes.get('/users',verifyJwt ,UserController.index); // COM AUTENTICAÇÃO
 routes.get('/users',UserController.index); //buscar todos os users
 
+
+//Controller de Pet
 routes.get('/users/pets', PetController.index); //buscar todos os pets
 routes.get('/users/:user_id/pets', PetController.show); // busca o pet do user
 routes.post('/users/:user_id/pets', upload.single('imagem'), PetController.store); //criando pet
 // routes.post('/users/:user_id/pets', upload.array('imagem', maxFotos), PetController.store);
-// routes.delete('/users/:user_id/pets', PetController.destroy);
+routes.delete('/pets/:id', PetController.destroy);
 
+
+
+//Controller de Categoria
 routes.get('/users/:user_id/categories', CategoryController.index);
 routes.post('/users/:user_id/categories', CategoryController.store);
 routes.delete('/users/:user_id/categories',verifyJwt, CategoryController.delete);
 routes.post('/login',UserController.login);
 
 
-//Rotas de solicitacao
+//Controller de Solicitações
+routes.post('/pets/:pets_id/solicitacao', SolicitacaoController.store);
+routes.get('/solicitacao/:id', SolicitacaoController.showSoli);
+routes.get('/solicitacao', SolicitacaoController.indexSoli);
+routes.get('/users/:user_solicita/solicitacao', SolicitacaoController.showUser);
+routes.get('/pets/:pets_id/solicitacao', SolicitacaoController.showPet);
+routes.delete('/solicitacao/:id', SolicitacaoController.destroy);
 
-routes.post('/pets/:pets_id/solicitacoes', SolicitacaoController.store); //criando pet
-
-///pets/:pets_id/solicitacoes
 
 module.exports = routes;
+
