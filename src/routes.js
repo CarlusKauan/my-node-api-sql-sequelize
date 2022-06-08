@@ -6,6 +6,8 @@ const UserController = require('./controllers/UserController');
 const PetController  = require('./controllers/PetController');
 const CategoryController  = require('./controllers/CategoryController');
 const SolicitacaoController  = require('./controllers/SolicitacaoController');
+const AprovadoController  = require('./controllers/AprovadoController');
+const ReprovadoController  = require('./controllers/ReprovadoController');
 
 
 const { verifyJwt } = require('./controllers/UserController');
@@ -46,6 +48,9 @@ routes.get('/users/:user_solicita/solicitacao', SolicitacaoController.showUser);
 routes.get('/pets/:pets_id/solicitacao', SolicitacaoController.showPet);
 routes.delete('/solicitacao/:id', SolicitacaoController.destroy);
 
+//Controllers de aprovado e reprovado
+routes.post('/solicitacao/:solicitacao_id/aprovados', AprovadoController.store);
+routes.post('/solicitacao/:solicitacao_id/reprovados', ReprovadoController.store);
 
 module.exports = routes;
 
