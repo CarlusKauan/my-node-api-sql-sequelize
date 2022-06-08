@@ -9,7 +9,7 @@ module.exports = {
 
   async store(req, res) {
     const { user_solicita } =  req.body;
-    const { aprovado } = req.body;
+    const { aprovado } = req.params;
     const { pets_id } = req.params;
 
     console.log("pets_id", pets_id)
@@ -20,7 +20,7 @@ module.exports = {
     const solicitacao = await Solicitacao.create({
       pets_id,
       user_solicita,
-      aprovado
+      aprovado : false
 
     });
 
@@ -87,13 +87,6 @@ module.exports = {
       return res.json(pet);
     },
 
-    //Cancelar Solicitação
-
-    // async destroy(req, res) {
-    //   const solicitacao = await Solicitacao.deleteOne(req.params.id)
-
-    //   return res.status(200).send({ message: 'Solicitação Cancelada' })
-    // },
 
     async destroy(req, res) {
       const { id } = req.params;
