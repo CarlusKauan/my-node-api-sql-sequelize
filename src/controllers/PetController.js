@@ -28,7 +28,8 @@ module.exports = {
   async store(req, res) {
     const { filename } = req.file;
     const { user_id } = req.params;
-    const { name, age, breed, descricao, uf, sexo, porte, situacao } = req.body;
+    const { name, age, breed, descricao, uf, sexo, porte } = req.body;
+    const { situacao } = req.params;
     // console.log( req.file + 'OK TA RECEBENDO');
     const user = await User.findByPk(user_id)
 
@@ -46,7 +47,7 @@ module.exports = {
       uf,
       sexo,
       porte,
-      situacao
+      situacao : 'Disponível Adoção'
     });
 
     return res.json(pet);
@@ -65,6 +66,8 @@ module.exports = {
 
     return res.status(200).send({ message: 'Pet excluído com sucesso' })
   },
+
+
 
 
 }
