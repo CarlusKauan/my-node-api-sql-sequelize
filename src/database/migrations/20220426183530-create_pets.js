@@ -37,6 +37,10 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
+      cidade:{
+        type: Sequelize.STRING,
+        alloNull: false,
+      },
     });
   },
 
