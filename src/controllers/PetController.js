@@ -8,6 +8,7 @@ module.exports = {
     const { user_id } = req.params;
 
     const user = await User.findByPk(user_id, {
+      where : {situacao : 'Disponível Adoção'},
       include: { association: 'pets' }
     });
 
@@ -16,7 +17,9 @@ module.exports = {
   },
 
   async index(req, res) {
-    const pets = await Pet.findAll()
+    const pets = await Pet.findAll({
+      where : {situacao : 'Disponível Adoção'}
+    });
 
     if (!pets) {
       res.status(400).json({ error: 'User not found' });
@@ -53,9 +56,7 @@ module.exports = {
     return res.json(pet);
   },
 
-  // async delete(req, res){
 
-  // },
 
   async destroy(req, res) {
     const { id } = req.params;
@@ -108,10 +109,7 @@ module.exports = {
       res.status(200).json({ pet })
     }
 
-}
-
-
-
+},
 
 };
 
