@@ -20,7 +20,8 @@ const upload = multer(uploadConfig);
 
 //Controller de User
 routes.get('/busca/:email', UserController.UserGet)
-routes.post('/users', upload.single('imagem'), UserController.store) //criando user
+// routes.post('/users', UserController.store) //criando user
+routes.post('/users', upload.single('imagem'), UserController.store)
 // routes.get('/users',verifyJwt ,UserController.index); // COM AUTENTICAÇÃO
 routes.get('/users', UserController.index); //buscar todos os users
 
@@ -31,6 +32,8 @@ routes.get('/users/:user_id/pets', PetController.show); // busca o pet do user
 routes.post('/users/:user_id/pets', upload.single('imagem'), PetController.store); //criando pet
 // routes.post('/users/:user_id/pets', upload.array('imagem', maxFotos), PetController.store);
 routes.delete('/pets/:id', PetController.destroy);
+
+
 
 
 
@@ -45,7 +48,9 @@ routes.get('/user/:id',UserController.show)
 
 
 //rotas de updateUser
-routes.put('/users/:id', UserController.updateUser);
+// routes.put('/users/:id', UserController.updateUser);
+
+
 
 
 //rotas de updatePet
@@ -67,6 +72,9 @@ routes.delete('/solicitacao/:id', SolicitacaoController.destroy);
 //Controllers de aprovado e reprovado
 routes.post('/solicitacao/:solicitacao_id/aprovados', AprovadoController.store);
 routes.post('/solicitacao/:solicitacao_id/reprovados', ReprovadoController.store);
+
+//
+routes.get('/Adotados/pets', AprovadoController.GetAdotados);
 
 module.exports = routes;
 
