@@ -8,6 +8,7 @@ const CategoryController  = require('./controllers/CategoryController');
 const SolicitacaoController  = require('./controllers/SolicitacaoController');
 const AprovadoController  = require('./controllers/AprovadoController');
 const ReprovadoController  = require('./controllers/ReprovadoController');
+const BuscaController  = require('./controllers/BuscaController');
 
 
 const { verifyJwt } = require('./controllers/UserController');
@@ -76,5 +77,10 @@ routes.post('/solicitacao/:solicitacao_id/reprovados', ReprovadoController.store
 //
 routes.get('/Adotados/pets', AprovadoController.GetAdotados);
 
+
+//Controlller de Busca
+routes.get('/portes1/pets', BuscaController.GetPorte1);
+routes.get('/portes2/pets', BuscaController.GetPorte2);
+routes.get('/portes3/pets', BuscaController.GetPorte3);
 module.exports = routes;
 
