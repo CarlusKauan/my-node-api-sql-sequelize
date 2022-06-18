@@ -29,9 +29,10 @@ module.exports = {
   },
 
   async store(req, res) {
+    
     const { filename } = req.file;
     const { user_id } = req.params;
-    const { name, age, breed, descricao, uf, sexo, porte } = req.body;
+    const { name, age, breed, descricao, uf, sexo, porte, cidade } = req.body;
     const { situacao } = req.params;
     // console.log( req.file + 'OK TA RECEBENDO');
     const user = await User.findByPk(user_id)
@@ -41,16 +42,18 @@ module.exports = {
     }
 
     const pet = await Pet.create({
+      
       name,
       age,
       breed,
       user_id,
       imagem: filename,
       descricao,
+      cidade,
       uf,
       sexo,
       porte,
-      situacao : 'Disponível Adoção'
+      situacao : 'Disponível para Adoção'
     });
 
     return res.json(pet);

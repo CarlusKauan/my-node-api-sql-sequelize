@@ -11,6 +11,7 @@ class Pet extends Model {
             uf: DataTypes.STRING,
             sexo: DataTypes.STRING,
             porte: DataTypes.STRING,
+            cidade: DataTypes.STRING,
             situacao: DataTypes.STRING
         }, {
             sequelize
