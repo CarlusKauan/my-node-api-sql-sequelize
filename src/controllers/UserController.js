@@ -123,16 +123,7 @@ module.exports = {
   async updateUser(req, res) {
 
       const { id } = req.params
-      const { name,
-        email,
-        imagem: filename,
-        telefone,
-        descricao,
-        data_nascimento,
-        rede_social,
-      } = req.body
-
-
+      const { senha } = req.body
 
       const user = await User.findOne({ where: { id } })
 
@@ -140,20 +131,11 @@ module.exports = {
         res.status(401).json({ message: "Nenhum usuario encontrado" })
       } else {
         const user = await User.update({
-          name,
-          email,
-          imagem: filename,
-          telefone,
-          descricao,
-          data_nascimento,
-          rede_social,
+          senha
         }, { where: { id } })
         // console.log(user + "teste");
         res.status(200).json({ user })
       }
-
-
-
   },
 
   //ainda não funciona
@@ -184,20 +166,45 @@ module.exports = {
     }
 
     return res.json(user);
+  },
+
+  async UserGetName(req, res){
+    const {name} = req.params;
+    const user = await User.findOne({where: {name}})
+
+    if(!user){
+      res.status(400).json({ message: "Nenhum usuario encontrado" })
+    }
+
+    return res.json(user);
+  },
+
+  async destroy(req, res) {
+    const { id } = req.params;
+    await User.destroy({
+      where: { id }
+
+    });
+
+    return res.status(200).send({ message: 'Conta excluida com sucesso' })
+  },
+
+
+  async RememberPass(res, req){
+    const { id } = req.params;
+    const { senha } = req.body;
+    const user = await User.findOne({where: {id}});
+    const hashedPassword = await bcrypt.hash(senha, 10)
+
+    if(!user){
+      res.status(400).json({ message: "Nenhum usuario encontrado" })
+    }
+    else{
+      const user = await User.update(User).where({id : id})
+      
+      return res.json(`senha alterada com sucesso ${user.senha}!!!!`);
+    }   
   }
 
+
 };
-
-
-
-// {
-// 	"name": "Diana",
-// 	"email": "Diana@gmail.com",
-// 	"imagem": "user_Wanda-1653154763235.jpg",
-// 	 "telefone": "(11) 9774-0009",
-//    "descricao": "Amo gatos"  ,
-//    "data_nascimento":"23/12/2000" ,
-//     "rede_social": "katia125@hotmail.com"
-// }
-
-

@@ -97,9 +97,4 @@ module.exports = {
 
       return res.status(200).send({ message: 'Solicitação Cancelada' })
     },
-
-
-
 };
-
-
