@@ -29,10 +29,10 @@ module.exports = {
   },
 
   async store(req, res) {
-    
+
     const { filename } = req.file;
     const { user_id } = req.params;
-    const { name, age, breed, descricao, uf, sexo, porte, cidade } = req.body;
+    const { name, age, breed, descricao, uf, sexo, porte } = req.body;
     const { situacao } = req.params;
     // console.log( req.file + 'OK TA RECEBENDO');
     const user = await User.findByPk(user_id)
@@ -42,14 +42,14 @@ module.exports = {
     }
 
     const pet = await Pet.create({
-      
+
       name,
       age,
       breed,
       user_id,
       imagem: filename,
       descricao,
-      cidade,
+      // cidade,
       uf,
       sexo,
       porte,
@@ -111,6 +111,40 @@ module.exports = {
       // console.log(user + "teste");
       res.status(200).json({ pet })
     }
+
+},
+
+
+async GetPorte1(req, res){
+  const portePet1 = await Pet.findAll({
+      where : {porte : 'pequeno'}
+
+
+  });
+
+  return res.json(portePet1);
+
+},
+
+async GetPorte2(req, res){
+  const portePet2 = await Pet.findAll({
+      where : {porte : 'medio'}
+
+
+  });
+
+  return res.json(portePet2);
+
+},
+
+async GetPorte3(req, res){
+  const portePet3 = await Pet.findAll({
+      where : {porte : 'grande'}
+
+
+  });
+
+  return res.json(portePet3);
 
 },
 
