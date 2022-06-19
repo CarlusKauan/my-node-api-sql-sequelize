@@ -76,5 +76,11 @@ routes.post('/solicitacao/:solicitacao_id/reprovados', ReprovadoController.store
 //
 routes.get('/Adotados/pets', AprovadoController.GetAdotados);
 
+
+
+routes.get('/portes1/pets', PetController.GetPorte1);
+routes.get('/portes2/pets', PetController.GetPorte2);
+routes.get('/portes3/pets', PetController.GetPorte3);
+
 module.exports = routes;
 
