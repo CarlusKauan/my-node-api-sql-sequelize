@@ -13,7 +13,7 @@ const { decode } = require("punycode");
 module.exports = {
   async store(req, res) {
 
-    const { filename } = req.file;
+    // const { filename } = req.file;
     const hashedPassword = await bcrypt.hash(req.body.senha, 10)
 
     const userExists = await User.findOne({
@@ -50,7 +50,7 @@ module.exports = {
     const user = await User.create({
       name,
       email,
-      imagem: filename,
+      //imagem: filename,
       senha: hashedPassword,
       telefone,
       descricao,
@@ -61,15 +61,10 @@ module.exports = {
     return res.json(user);
   },
 
-
-
-
   async index(req, res) {
     const users = await User.findAll();
     return res.json(users);
   },
-
-
 
   async login(req, res) {
 
@@ -92,8 +87,6 @@ module.exports = {
     return res.status(400).json('UserName e senha inválidos');
   },
 
-
-
   async show(req, res) {
     const {
       id
@@ -105,8 +98,6 @@ module.exports = {
     }
     return res.json(user)
   },
-
-
 
   verifyJwt(req, res, next) {
     const token = req.headers['x-access-token'];// pega na inserção do token e coloca na variavel (token-jwt é pego no headers)
@@ -125,14 +116,12 @@ module.exports = {
       const { id } = req.params
       const { name,
         email,
-        imagem: filename,
+        //imagem: filename,
         telefone,
         descricao,
         data_nascimento,
         rede_social,
       } = req.body
-
-
 
       const user = await User.findOne({ where: { id } })
 
@@ -142,7 +131,7 @@ module.exports = {
         const user = await User.update({
           name,
           email,
-          imagem: filename,
+          //imagem: filename,
           telefone,
           descricao,
           data_nascimento,
@@ -151,9 +140,6 @@ module.exports = {
         // console.log(user + "teste");
         res.status(200).json({ user })
       }
-
-
-
   },
 
   //ainda não funciona
@@ -173,8 +159,6 @@ module.exports = {
   //     // console.log(user + "teste2222");
   //   }
   // },
-
-
   async UserGet(req, res){
     const {email} = req.params;
     const user = await User.findOne({where: {email}})
@@ -185,19 +169,4 @@ module.exports = {
 
     return res.json(user);
   }
-
 };
-
-
-
-// {
-// 	"name": "Diana",
-// 	"email": "Diana@gmail.com",
-// 	"imagem": "user_Wanda-1653154763235.jpg",
-// 	 "telefone": "(11) 9774-0009",
-//    "descricao": "Amo gatos"  ,
-//    "data_nascimento":"23/12/2000" ,
-//     "rede_social": "katia125@hotmail.com"
-// }
-
-

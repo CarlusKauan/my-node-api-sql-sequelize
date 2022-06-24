@@ -50,7 +50,4 @@ module.exports = {
 
         return res.json({ message: 'Remove Category with Success '});
     }
-
-
-
 }
