@@ -17,9 +17,7 @@ module.exports = {
   },
 
   async index(req, res) {
-    const pets = await Pet.findAll({
-      where : {situacao : 'Disponível Adoção'}
-    });
+    const pets = await Pet.findAll();
 
     if (!pets) {
       res.status(400).json({ error: 'User not found' });
@@ -28,11 +26,14 @@ module.exports = {
     return res.status(200).json(pets)
   },
 
+
+
+
   async store(req, res) {
 
     const { filename } = req.file;
     const { user_id } = req.params;
-    const { name, age, breed, descricao, uf, sexo, porte } = req.body;
+    const { name, age, breed, descricao, uf, sexo, porte, cidade } = req.body;
     const { situacao } = req.params;
     // console.log( req.file + 'OK TA RECEBENDO');
     const user = await User.findByPk(user_id)
@@ -49,7 +50,7 @@ module.exports = {
       user_id,
       imagem: filename,
       descricao,
-      // cidade,
+      cidade,
       uf,
       sexo,
       porte,
@@ -117,7 +118,7 @@ module.exports = {
 
 async GetPorte1(req, res){
   const portePet1 = await Pet.findAll({
-      where : {porte : 'pequeno'}
+      where : {porte : 'PEQUENO'}
 
 
   });
@@ -128,7 +129,7 @@ async GetPorte1(req, res){
 
 async GetPorte2(req, res){
   const portePet2 = await Pet.findAll({
-      where : {porte : 'medio'}
+      where : {porte : 'MEDIO'}
 
 
   });
@@ -139,7 +140,7 @@ async GetPorte2(req, res){
 
 async GetPorte3(req, res){
   const portePet3 = await Pet.findAll({
-      where : {porte : 'grande'}
+      where : {porte : 'GRANDE'}
 
 
   });
