@@ -30,7 +30,7 @@ module.exports = {
 
 
 
-    //listar todas as solicitações
+  //listar todas as solicitações
   async indexSoli(req, res) {
     const {user_id} = req.params;
     const solicitacoes = await Solicitacao.findAll({where:{user_id}});
@@ -40,7 +40,6 @@ module.exports = {
     }
 
     return res.status(200).json(solicitacoes);
-
   },
 
 
@@ -63,9 +62,10 @@ module.exports = {
     return res.status(200).json(solicitacao.pets);
 
 
+    return res.status(200).json(solicitacao);
   },
 
-    // Exibir o usuario que fez a solicitação
+  // Exibir o usuario que fez a solicitação
     async showUser(req, res) {
       const { user_solicita } = req.params;
 
@@ -75,11 +75,10 @@ module.exports = {
         include: { association: 'solicita' }
       });
 
-
       return res.json(user);
     },
 
-     // Exibir o pet que foi solicitado e as solicitações
+    // Exibir o pet que foi solicitado e as solicitações
      async showPet(req, res) {
       const { pets_id } = req.params;
 
@@ -89,10 +88,8 @@ module.exports = {
         include: { association: 'solicitado' }
       });
 
-
       return res.json(pet);
     },
-
 
     async destroy(req, res) {
       const { id } = req.params;
