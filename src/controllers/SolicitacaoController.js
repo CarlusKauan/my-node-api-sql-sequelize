@@ -8,7 +8,7 @@ const User = require('../models/User');
 module.exports = {
 
   async store(req, res) {
-    const { user_solicita } =  req.body;
+    const { user_solicita, user_id } =  req.body;
     const { aprovado } = req.params;
     const { pets_id } = req.params;
 
@@ -20,6 +20,7 @@ module.exports = {
     const solicitacao = await Solicitacao.create({
       pets_id,
       user_solicita,
+      user_id,
       aprovado : false
 
     });
@@ -31,7 +32,8 @@ module.exports = {
 
     //listar todas as solicitações
   async indexSoli(req, res) {
-    const solicitacoes = await Solicitacao.findAll();
+    const {user_id} = req.params;
+    const solicitacoes = await Solicitacao.findAll({where:{user_id}});
 
     if (!solicitacoes) {
       res.status(400).json({ error: 'Solicitation not found' });
@@ -48,13 +50,17 @@ module.exports = {
 
     console.log("id", id)
 
-    const solicitacao = await Solicitacao.findByPk(id);
+    const solicitacao = await Solicitacao.findByPk(id,{
+      include: { association: 'solicitado' },
+
+
+    });
 
     if (!solicitacao) {
       res.status(400).json({ error: 'Solicitation not found' });
     }
 
-    return res.status(200).json(solicitacao);
+    return res.status(200).json(solicitacao.pets);
 
 
   },
@@ -95,6 +101,6 @@ module.exports = {
 
       });
 
-      return res.status(200).send({ message: 'Solicitação Cancelada' })
+      return res.status(200).send({ message: 'Solicitação Cancelada' });
     },
 };

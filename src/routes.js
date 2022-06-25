@@ -23,7 +23,7 @@ const upload = multer(uploadConfig);
 // routes.get('/user/:name',UserController.UserGetName)
 routes.get('/usuario/:id',UserController.show)
 routes.get('/busca/:email', UserController.UserGet)
-routes.post('/users',upload.single('imagem'), UserController.store) //criando user
+routes.post('/users', upload.single('imagem'), UserController.store)
 // routes.get('/users',verifyJwt ,UserController.index); // COM AUTENTICAÇÃO
 routes.get('/users', UserController.index); //buscar todos os users
 
@@ -41,6 +41,8 @@ routes.delete('/pets/:id', PetController.destroy);
 
 
 
+
+
 //Controller de Categoria
 routes.get('/users/:user_id/categories', CategoryController.index);
 routes.post('/users/:user_id/categories', CategoryController.store);
@@ -48,25 +50,11 @@ routes.delete('/users/:user_id/categories',verifyJwt, CategoryController.delete)
 routes.post('/login',UserController.login);
 
 
-
-
-//rotas de updateUser
-// routes.put('/users/:id', UserController.updateUser);
-
-
-//rotas de updatePet
-// routes.patch('/pets/:id', PetController.updatePet);
-
-
-
-
-
-
 //Controller de Solicitações
 routes.post('/pets/:pets_id/solicitacao', SolicitacaoController.store);
 
-routes.get('/solicitacao/:id', SolicitacaoController.showSoli);
-routes.get('/solicitacao', SolicitacaoController.indexSoli);
+routes.get('/solicitacao/:id', SolicitacaoController.showSoli); // nou
+routes.get('/solici/:user_id', SolicitacaoController.indexSoli);//nou
 routes.get('/users/:user_solicita/solicitacao', SolicitacaoController.showUser); // solicitacao que o usuario tem
 routes.get('/pets/:pets_id/solicitacao', SolicitacaoController.showPet); // solicitação que o pet tem
 routes.delete('/solicitacao/:id', SolicitacaoController.destroy);
@@ -74,6 +62,15 @@ routes.delete('/solicitacao/:id', SolicitacaoController.destroy);
 //Controllers de aprovado e reprovado
 routes.post('/solicitacao/:solicitacao_id/aprovados', AprovadoController.store);
 routes.post('/solicitacao/:solicitacao_id/reprovados', ReprovadoController.store);
+
+//
+routes.get('/Adotados/pets', AprovadoController.GetAdotados);
+
+
+
+routes.get('/portes1/pets', PetController.GetPorte1);
+routes.get('/portes2/pets', PetController.GetPorte2);
+routes.get('/portes3/pets', PetController.GetPorte3);
 
 module.exports = routes;
 
