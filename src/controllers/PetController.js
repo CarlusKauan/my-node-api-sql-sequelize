@@ -1,26 +1,37 @@
-
 const Pet = require('../models/Pet');
 const User = require('../models/User');
 
 module.exports = {
 
   async show(req, res) {
-    const { user_id } = req.params;
+    const {
+      user_id
+    } = req.params;
 
     const user = await User.findByPk(user_id, {
-      where : {situacao : 'Disponível Adoção'},
-      include: { association: 'pets' }
+      where: {
+        situacao: 'Disponível Adoção'
+      },
+      include: {
+        association: 'pets'
+      }
     });
 
-    return res.json(user.pets)  //-> caso queira retornar so os dados dos pets !
+    return res.json(user.pets) //-> caso queira retornar so os dados dos pets !
     // return res.json(user);
   },
 
   async index(req, res) {
-    const pets = await Pet.findAll();
+    const pets = await Pet.findAll({
+      where: {
+        situacao: 'Disponível Adoção'
+      }
+    });
 
     if (!pets) {
-      res.status(400).json({ error: 'User not found' });
+      res.status(400).json({
+        error: 'User not found'
+      });
     }
 
     return res.status(200).json(pets)
@@ -35,11 +46,14 @@ module.exports = {
     const { user_id } = req.params;
     const { name, age, breed, descricao, uf, sexo, porte, cidade } = req.body;
     const { situacao } = req.params;
-    // console.log( req.file + 'OK TA RECEBENDO');
+    
+    
     const user = await User.findByPk(user_id)
 
     if (!user) {
-      return res.status(400).json({ error: 'usuario não existe ＞﹏＜' })
+      return res.status(400).json({
+        error: 'usuario não existe ＞﹏＜'
+      })
     }
 
     const pet = await Pet.create({
@@ -54,31 +68,35 @@ module.exports = {
       uf,
       sexo,
       porte,
-      situacao : 'Disponível para Adoção'
+      situacao: 'Disponível para Adoção'
     });
 
     return res.json(pet);
   },
 
-
-
   async destroy(req, res) {
-    const { id } = req.params;
+    const {
+      id
+    } = req.params;
     await Pet.destroy({
-      where: { id }
+      where: {
+        id
+      }
 
     });
 
-    return res.status(200).send({ message: 'Pet excluído com sucesso' })
+    return res.status(200).send({
+      message: 'Pet excluído com sucesso'
+    })
   },
-
-
-
 
   async updatePet(req, res) {
 
-    const { id } = req.params
-    const {name,
+    const {
+      id
+    } = req.params
+    const {
+      name,
       age,
       breed,
       // user_id,
@@ -90,12 +108,16 @@ module.exports = {
       situacao
     } = req.body
 
-
-
-    const pet = await Pet.findOne({ where: { id } })
+    const pet = await Pet.findOne({
+      where: {
+        id
+      }
+    })
 
     if (!pet) {
-      res.status(401).json({ message: "Nenhum pet encontrado" })
+      res.status(401).json({
+        message: "Nenhum pet encontrado"
+      })
     } else {
       const pet = await Pet.update({
         name,
@@ -108,62 +130,46 @@ module.exports = {
         sexo,
         porte,
         situacao
-      }, { where: { id } })
+      }, {
+        where: {
+          id
+        }
+      })
       // console.log(user + "teste");
-      res.status(200).json({ pet })
+      res.status(200).json({
+        pet
+      })
     }
+  },
 
-},
+  async GetPorte1(req, res) {
+    const portePet1 = await Pet.findAll({
+      where: {
+        porte: 'pequeno'
+      }
+    });
 
+    return res.json(portePet1);
+  },
 
-async GetPorte1(req, res){
-  const portePet1 = await Pet.findAll({
-      where : {porte : 'PEQUENO'}
+  async GetPorte2(req, res) {
+    const portePet2 = await Pet.findAll({
+      where: {
+        porte: 'medio'
+      }
+    });
 
+    return res.json(portePet2);
+  },
 
-  });
+  async GetPorte3(req, res) {
+    const portePet3 = await Pet.findAll({
+      where: {
+        porte: 'grande'
+      }
+    });
 
-  return res.json(portePet1);
+    return res.json(portePet3);
+  },
 
-},
-
-async GetPorte2(req, res){
-  const portePet2 = await Pet.findAll({
-      where : {porte : 'MEDIO'}
-
-
-  });
-
-  return res.json(portePet2);
-
-},
-
-async GetPorte3(req, res){
-  const portePet3 = await Pet.findAll({
-      where : {porte : 'GRANDE'}
-
-
-  });
-
-  return res.json(portePet3);
-
-},
-
-};
-
-
-
-
-
-
-// {
-//   "name": "vivi",
-//   "age": "2",
-//   "breed": "vira-lata",
-//   "imagem": "gato",
-//   "descricao": "fedido",
-//   "uf": "sp",
-//   "sexo": "femea",
-//   "porte": "medio",
-//   "situacao": "disponivel adoção"
-// }
+}
