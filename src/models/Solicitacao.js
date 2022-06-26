@@ -4,6 +4,13 @@ class Solicitacao extends Model{
   static init(sequelize) {
     super.init({
       aprovado: DataTypes.BOOLEAN,
+      name_solicita: DataTypes.STRING,
+      telefone_solicita: DataTypes.STRING,
+      imagem_solicita: DataTypes.STRING,
+      name_pet: DataTypes.STRING,
+      name_dono: DataTypes.STRING,
+      telefone_dono: DataTypes.STRING
+
 
     }, {
       sequelize,
