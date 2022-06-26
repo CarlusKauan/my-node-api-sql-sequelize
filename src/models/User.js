@@ -10,7 +10,8 @@ class User extends Model {
             telefone: DataTypes.STRING,
             descricao: DataTypes.STRING,
             data_nascimento: DataTypes.STRING,
-            rede_social: DataTypes.STRING
+            rede_social: DataTypes.STRING,
+
         }, {
             sequelize
         })

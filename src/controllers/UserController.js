@@ -11,7 +11,9 @@ const { use } = require("../routes");
 const { decode } = require("punycode");
 
 module.exports = {
+
   async store(req, res) {
+
 
     // const { filename } = req.file;
     const hashedPassword = await bcrypt.hash(req.body.senha, 10)
@@ -114,9 +116,7 @@ module.exports = {
   async updateUser(req, res) {
 
       const { id } = req.params
-<<<<<<< HEAD
       const { senha } = req.body
-=======
       const { name,
         email,
         //imagem: filename,
@@ -125,7 +125,6 @@ module.exports = {
         data_nascimento,
         rede_social,
       } = req.body
->>>>>>> b7a7cfe611aedee7942c07a4a33b5f409c565f93
 
       const user = await User.findOne({ where: { id } })
 
@@ -133,9 +132,7 @@ module.exports = {
         res.status(401).json({ message: "Nenhum usuario encontrado" })
       } else {
         const user = await User.update({
-<<<<<<< HEAD
-          senha
-=======
+          senha,
           name,
           email,
           //imagem: filename,
@@ -143,7 +140,6 @@ module.exports = {
           descricao,
           data_nascimento,
           rede_social,
->>>>>>> b7a7cfe611aedee7942c07a4a33b5f409c565f93
         }, { where: { id } })
         // console.log(user + "teste");
         res.status(200).json({ user })
@@ -176,7 +172,6 @@ module.exports = {
     }
 
     return res.json(user);
-<<<<<<< HEAD
   },
 
   async UserGetName(req, res){
@@ -212,13 +207,10 @@ module.exports = {
     }
     else{
       const user = await User.update(User).where({id : id})
-      
+
       return res.json(`senha alterada com sucesso ${user.senha}!!!!`);
-    }   
+    }
   }
 
 
-=======
-  }
->>>>>>> b7a7cfe611aedee7942c07a4a33b5f409c565f93
 };
