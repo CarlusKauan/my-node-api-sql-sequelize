@@ -16,7 +16,7 @@ const { Router } = require('express');
 
 const routes = express.Router()
 const upload = multer(uploadConfig);
-// const maxFotos = 3;
+// const maxFotos = 2;
 
 
 //Controller de User
@@ -51,8 +51,7 @@ routes.post('/login',UserController.login);
 
 
 //Controller de Solicitações
-routes.post('/pets/:pets_id/solicitacao', SolicitacaoController.store);
-
+routes.post('/pets/:pets_id/solicitacao', upload.single('imagem_solicita'), SolicitacaoController.store);
 routes.get('/solicitacao/:id', SolicitacaoController.showSoli); // nou
 routes.get('/solici/:user_id', SolicitacaoController.indexSoli);//nou
 routes.get('/users/:user_solicita/solicitacao', SolicitacaoController.showUser); // solicitacao que o usuario tem
@@ -71,6 +70,8 @@ routes.get('/Adotados/pets', AprovadoController.GetAdotados);
 routes.get('/portes1/pets', PetController.GetPorte1);
 routes.get('/portes2/pets', PetController.GetPorte2);
 routes.get('/portes3/pets', PetController.GetPorte3);
+
+
 
 module.exports = routes;
 
