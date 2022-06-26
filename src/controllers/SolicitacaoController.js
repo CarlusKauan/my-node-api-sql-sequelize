@@ -59,7 +59,7 @@ module.exports = {
       res.status(400).json({ error: 'Solicitation not found' });
     }
 
-    return res.status(200).json(solicitacao.pets);
+    // return res.status(200).json(solicitacao.pets);
 
 
     return res.status(200).json(solicitacao);

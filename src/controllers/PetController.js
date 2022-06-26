@@ -22,11 +22,7 @@ module.exports = {
   },
 
   async index(req, res) {
-    const pets = await Pet.findAll({
-      where: {
-        situacao: 'Disponível Adoção'
-      }
-    });
+    const pets = await Pet.findAll();
 
     if (!pets) {
       res.status(400).json({
