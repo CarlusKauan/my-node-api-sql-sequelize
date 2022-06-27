@@ -6,7 +6,7 @@ class Solicitacao extends Model{
       aprovado: DataTypes.BOOLEAN,
       name_solicita: DataTypes.STRING,
       telefone_solicita: DataTypes.STRING,
-      imagem_solicita: DataTypes.STRING,
+      // imagem_solicita: DataTypes.STRING,
       name_pet: DataTypes.STRING,
       name_dono: DataTypes.STRING,
       telefone_dono: DataTypes.STRING
