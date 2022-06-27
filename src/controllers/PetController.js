@@ -1,7 +1,9 @@
+const { update } = require('../models/Pet');
 const Pet = require('../models/Pet');
 const User = require('../models/User');
+const AprovadoController = require('./AprovadoController');
 
-
+// WHERE = situacao: 'Disponível Adoção' está funcionando
 
 module.exports = {
 
@@ -70,7 +72,7 @@ module.exports = {
       uf,
       sexo,
       porte,
-      situacao: 'Disponível para Adoção'
+      situacao : 'Disponível para Adoção'
     });
 
     return res.json(pet);
@@ -102,7 +104,7 @@ module.exports = {
       age,
       breed,
       // user_id,
-      imagem: filename,
+      // imagem: filename,
       descricao,
       uf,
       sexo,
@@ -126,7 +128,7 @@ module.exports = {
         age,
         breed,
         // user_id,
-        imagem: filename,
+        // imagem: filename,
         descricao,
         uf,
         sexo,
