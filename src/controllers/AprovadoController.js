@@ -15,11 +15,44 @@ module.exports = {
 
       return res.json(solicitacao);
     },
-    
+
     async GetAdotados(req, res){
       const petAdotado = await Pet.findAll({
           where : {situacao : 'Adotado'}
       });
       return res.json(petAdotado);
     },
+
+
+    // situacao 'Adotado' no body
+    async updateSituacao(req, res) {
+
+      const { id } = req.params;
+      const { situacao } = req.body;
+
+      const pet = await Pet.findOne({
+        where: {id}
+      })
+
+
+      if (!pet) {
+        res.status(401).json({
+          message: "Nenhum pet encontrado"
+        })
+      } else {
+        const pet = await Pet.update({
+          situacao
+        }, {
+          where: { id }
+
+        })
+        // console.log(user + "teste");
+        res.status(200).json({ pet})
+
+      }
+    },
+
+
+
+
 };
