@@ -16,14 +16,14 @@ const { Router } = require('express');
 
 const routes = express.Router()
 const upload = multer(uploadConfig);
-// const maxFotos = 2;
+// const maxFotos = 4;
 
 
 //Controller de User
 // routes.get('/user/:name',UserController.UserGetName)
 routes.get('/usuario/:id',UserController.show)
 routes.get('/busca/:email', UserController.UserGet)
-routes.post('/users', upload.single('imagem'), UserController.store)
+routes.post('/users', upload.single('imagem' ), UserController.store)
 // routes.get('/users',verifyJwt ,UserController.index); // COM AUTENTICAÇÃO
 routes.get('/users', UserController.index); //buscar todos os users
 
@@ -58,6 +58,8 @@ routes.get('/users/:user_solicita/solicitacao', SolicitacaoController.showUser);
 routes.get('/pets/:pets_id/solicitacao', SolicitacaoController.showPet); // solicitação que o pet tem
 routes.delete('/solicitacao/:id', SolicitacaoController.destroy);
 
+
+
 //Controllers de aprovado e reprovado
 routes.post('/solicitacao/:solicitacao_id/aprovados', AprovadoController.store);
 routes.post('/solicitacao/:solicitacao_id/reprovados', ReprovadoController.store);
@@ -70,6 +72,12 @@ routes.get('/Adotados/pets', AprovadoController.GetAdotados);
 routes.get('/portes1/pets', PetController.GetPorte1);
 routes.get('/portes2/pets', PetController.GetPorte2);
 routes.get('/portes3/pets', PetController.GetPorte3);
+
+
+// rota de pets que foram aprovados e passando a situacao para adotados
+routes.put('/pets/:id', AprovadoController.updateSituacao);
+
+
 
 
 
