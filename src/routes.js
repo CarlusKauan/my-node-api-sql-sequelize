@@ -74,11 +74,12 @@ routes.get('/portes2/pets', PetController.GetPorte2);
 routes.get('/portes3/pets', PetController.GetPorte3);
 
 
+//Update
 // rota de pets que foram aprovados e passando a situacao para adotados
 routes.put('/pets/:id', AprovadoController.updateSituacao);
 
-
-
+routes.put('/users/:id', UserController.updateUser);
+routes.put('/pets/:id', PetController.updatePet);
 
 
 module.exports = routes;
