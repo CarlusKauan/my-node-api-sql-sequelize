@@ -51,7 +51,7 @@ routes.post('/login',UserController.login);
 
 
 //Controller de Solicitações
-routes.post('/pets/:pets_id/solicitacao', upload.single('imagem_solicita'), SolicitacaoController.store);
+routes.post('/pets/:pets_id/solicitacao', /*upload.single('imagem_solicita'),*/ SolicitacaoController.store);
 routes.get('/solicitacao/:id', SolicitacaoController.showSoli); // nou
 routes.get('/solici/:user_id', SolicitacaoController.indexSoli);//nou
 routes.get('/users/:user_solicita/solicitacao', SolicitacaoController.showUser); // solicitacao que o usuario tem
