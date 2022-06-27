@@ -1,6 +1,8 @@
 const Pet = require('../models/Pet');
 const User = require('../models/User');
 
+
+
 module.exports = {
 
   async show(req, res) {
@@ -9,9 +11,9 @@ module.exports = {
     } = req.params;
 
     const user = await User.findByPk(user_id, {
-      where: {
-        situacao: 'Disponível Adoção'
-      },
+      // where: {
+      //   situacao: 'Disponível Adoção'
+      // },
       include: {
         association: 'pets'
       }
@@ -40,10 +42,10 @@ module.exports = {
 
     const { filename } = req.file;
     const { user_id } = req.params;
-    const { name, age, breed, descricao, uf, sexo, porte, cidade } = req.body;
+    const { name, age, breed, descricao, uf, sexo, porte, cidade} = req.body;
     const { situacao } = req.params;
-    
-    
+
+
     const user = await User.findByPk(user_id)
 
     if (!user) {
@@ -141,7 +143,7 @@ module.exports = {
   async GetPorte1(req, res) {
     const portePet1 = await Pet.findAll({
       where: {
-        porte: 'pequeno'
+        porte: 'PEQUENO'
       }
     });
 
@@ -151,7 +153,7 @@ module.exports = {
   async GetPorte2(req, res) {
     const portePet2 = await Pet.findAll({
       where: {
-        porte: 'medio'
+        porte: 'MEDIO'
       }
     });
 
@@ -161,7 +163,7 @@ module.exports = {
   async GetPorte3(req, res) {
     const portePet3 = await Pet.findAll({
       where: {
-        porte: 'grande'
+        porte: 'GRANDE'
       }
     });
 

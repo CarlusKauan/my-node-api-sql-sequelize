@@ -17,12 +17,28 @@ module.exports = {
           onUpdate: 'CASCADE',
           onDelete: 'CASCADE',
         },
+        name_solicita: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        telefone_solicita: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        // imagem_solicita: {
+        //   type: Sequelize.STRING,
+        //   allowNull: false,
+        // },
         pets_id: {
           type: Sequelize.INTEGER,
           allowNull: false,
           references: { model: 'pets', key: 'id' },
           onUpdate: 'CASCADE',
           onDelete: 'CASCADE',
+        },
+        name_pet: {
+          type: Sequelize.STRING,
+          allowNull: false,
         },
         aprovado: {
           type: Sequelize.BOOLEAN,
@@ -45,6 +61,15 @@ module.exports = {
           onUpdate: 'CASCADE',
           onDelete: 'CASCADE',
         },
+        name_dono: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        telefone_dono: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+
       });
 
   },

@@ -11,9 +11,11 @@ const { use } = require("../routes");
 const { decode } = require("punycode");
 
 module.exports = {
+
   async store(req, res) {
 
-    // const { filename } = req.file;
+
+    const { filename } = req.file;
     const hashedPassword = await bcrypt.hash(req.body.senha, 10)
 
     const userExists = await User.findOne({
@@ -50,7 +52,7 @@ module.exports = {
     const user = await User.create({
       name,
       email,
-      //imagem: filename,
+      imagem: filename,
       senha: hashedPassword,
       telefone,
       descricao,
@@ -190,9 +192,9 @@ module.exports = {
     }
     else{
       const user = await User.update(User).where({id : id})
-      
+
       return res.json(`senha alterada com sucesso ${user.senha}!!!!`);
-    }   
+    }
   }
 
 

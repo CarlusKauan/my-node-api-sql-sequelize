@@ -16,11 +16,12 @@ Category.init(connection);
 Solicitacao.init(connection);
 
 
+
 User.associate(connection.models);
 Pet.associate(connection.models);
 Category.associate(connection.models);
 Solicitacao.associate(connection.models);
-// Tests.associate(connection.models);
+
 
 module.exports = connection;
 
